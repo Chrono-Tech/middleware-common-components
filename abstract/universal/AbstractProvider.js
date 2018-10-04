@@ -76,10 +76,11 @@ module.exports = class AbstractProvider {
    * @description safe connector switching, by moving requests to
    * @return {Promise<bluebird>}
    */
-  async switchConnectorSafe() {
+  async switchConnectorSafe () {
     return new Promise(res => {
       sem.take(async () => {
-        await this.switchConnector();
+        if (!this.connector)
+          await this.switchConnector();
         res(this.connector);
         sem.leave();
       });
