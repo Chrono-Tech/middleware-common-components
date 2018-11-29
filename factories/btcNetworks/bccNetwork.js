@@ -5,7 +5,7 @@
  */
 
 const AbstractNetwork = require('../../abstract/btc/AbstractNetwork'),
-  bcc = require('bitcoincashjs');
+  bcc = require('bchaddrjs');
 
 class BCC extends AbstractNetwork {
 
@@ -31,10 +31,9 @@ class BCC extends AbstractNetwork {
     };
 
     try {
-      const decoded = bcc.Address.fromString(address);
-      types.bitpay = decoded.toString(bcc.Address.BitpayFormat);
-      types.new = decoded.toString(bcc.Address.CashAddrFormat);
-      types.legacy = decoded.toString();
+      types.new = bcc.toCashAddress(address);
+      types.legacy = bcc.toLegacyAddress(address);
+      types.bitpay = bcc.toBitpayAddress(address);
 
       return types;
     } catch (e) {

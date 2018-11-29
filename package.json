@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/ega-forever/middleware-common-components#readme",
   "dependencies": {
+    "bchaddrjs": "^0.3.0",
     "bcoin": "^1.0.2",
-    "bitcoincashjs": "^0.1.10",
     "bluebird": "^3.5.1",
     "bunyan": "^1.8.12",
     "require-all": "^3.0.0",
