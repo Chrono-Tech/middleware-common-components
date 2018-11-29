@@ -4,22 +4,41 @@
  * @author Egor Zuev <zyev.egor@gmail.com>
  */
 
-const bitcoin = require('bitcoinjs-lib'),
+const Address = require('bcoin/lib/primitives/address'),
   AbstractNetwork = require('../../abstract/btc/AbstractNetwork');
 
 class LITECOIN extends AbstractNetwork {
 
   constructor() {
-    super({
-      type: 'litecoin',
-      addressPrefix: {
-        pubkeyhash: 0x30,
-        scripthash: 0x32,
-        witnesspubkeyhash: 0x06,
-        witnessscripthash: 0x0a,
-        bech32: 'lc'
+
+    const settings = {
+      new: {
+        type: 'litecoin',
+        addressPrefix: {
+          pubkeyhash: 0x30,
+          scripthash: 0x32,
+          witnesspubkeyhash: 0x06,
+          witnessscripthash: 0x0a,
+          bech32: 'lc'
+        }
+      },
+      legacy: {
+        type: 'litecoin',
+        addressPrefix: {
+          pubkeyhash: 0x30,
+          scripthash: 0x05,
+          witnesspubkeyhash: 0x06,
+          witnessscripthash: 0x0a,
+          bech32: 'lc'
+        }
       }
-    });
+    };
+
+
+    super(settings.legacy);
+    this.settings = settings;
+
+
   }
 
   getAllAddressForms(address) {
@@ -29,14 +48,14 @@ class LITECOIN extends AbstractNetwork {
     };
 
     try {
-      const decoded = bitcoin.address.fromBase58Check(address);
-      types.legacy = bitcoin.address.toBase58Check(decoded.hash, 50);
-      types.new = bitcoin.address.toBase58Check(decoded.hash, 5);
+      types.legacy = Address.fromString(address).toString(this);
+      types.new = Address.fromString(address).toString(new AbstractNetwork(this.settings.new));
 
       return types;
     } catch (e) {
       return types;
     }
+
   }
 
 }
