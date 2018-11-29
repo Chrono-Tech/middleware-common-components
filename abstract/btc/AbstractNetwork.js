@@ -1,4 +1,5 @@
-const Network = require('bcoin/lib/protocol/network');
+const Network = require('bcoin/lib/protocol/network'),
+  networks = require('bcoin/lib/protocol/networks');
 
 class AbstractNetwork extends Network {
 
@@ -7,6 +8,7 @@ class AbstractNetwork extends Network {
     options.deploys = [];
     options.checkpointMap = [];
     super(options);
+    networks[options.type] = options;
   }
 
   getAllAddressForms(address) {
