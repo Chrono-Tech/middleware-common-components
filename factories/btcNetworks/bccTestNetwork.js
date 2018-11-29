@@ -5,13 +5,12 @@
  */
 
 const AbstractNetwork = require('../../abstract/btc/AbstractNetwork'),
-  bcc = require('bitcoincashjs');
-
+  bcc = require('bchaddrjs');
 
 
 class BCCTEST extends AbstractNetwork {
 
-  constructor() {
+  constructor () {
     super({
       type: 'bcctest',
       addressPrefix: {
@@ -22,21 +21,19 @@ class BCCTEST extends AbstractNetwork {
         bech32: 'tb'
       }
     });
-
   }
 
-  getAllAddressForms(address) {
+  getAllAddressForms (address) {
     const types = {
-      bitpay: null,
       new: null,
-      legacy: address
+      legacy: address,
+      bitpay: null
     };
 
     try {
-      const decoded = bcc.Address.fromString(address);
-      types.bitpay = decoded.toString(bcc.Address.BitpayFormat);
-      types.new = decoded.toString(bcc.Address.CashAddrFormat);
-      types.legacy = decoded.toString();
+      types.new = bcc.toCashAddress(address);
+      types.legacy = bcc.toLegacyAddress(address);
+      types.bitpay = bcc.toBitpayAddress(address);
 
       return types;
     } catch (e) {
