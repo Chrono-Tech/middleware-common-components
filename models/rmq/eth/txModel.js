@@ -26,7 +26,7 @@ class TxModel extends AbstractModel {
           hash: Joi.string(),
           index: Joi.number().integer(),
           txIndex: Joi.number().integer(),
-          removed: Joi.number().integer()
+          removed: Joi.boolean()
         })
       ),
       nonce: Joi.number().integer().required(),
