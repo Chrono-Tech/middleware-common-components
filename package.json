@@ -23,6 +23,7 @@
     "bluebird": "^3.5.1",
     "bunyan": "^1.8.12",
     "bytebuffer": "^5.0.1",
+    "create-hash": "^1.2.0",
     "joi": "^14.3.0",
     "js-sha3": "^0.8.0",
     "lodash": "^4.17.11",
