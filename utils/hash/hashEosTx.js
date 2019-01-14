@@ -4,6 +4,6 @@
  */
 const createHash = require('create-hash');
 module.exports = (txRaw) => {
-  const b = new Buffer(txRaw.serializedTransaction);
+  const b = Buffer.from(txRaw.serializedTransaction, 'hex');
   return createHash('sha256').update(b).digest().toString('hex')
 };
