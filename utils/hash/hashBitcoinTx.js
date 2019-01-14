@@ -3,7 +3,7 @@
  * Licensed under the AGPL Version 3 license.
  */
 const bitcoin = require('bitcoinjs-lib');
-module.exports = async (txRaw) => {
+module.exports = (txRaw) => {
   const tx = bitcoin.Transaction.fromHex(txRaw);
   return tx.getHash().toString('hex');
 };

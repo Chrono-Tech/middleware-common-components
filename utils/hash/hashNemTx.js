@@ -5,7 +5,7 @@
 const nemDeserializeTx = require('./nemDeserializeTx'),
 	nemHash = require('./nemHash');
 
-module.exports = async (txRaw) => {
+module.exports = (txRaw) => {
 	const txData = JSON.parse(txRaw).data;
 	const tx = nemDeserializeTx.parse(txData); 
 	return nemHash.calculateTransactionHash(tx);

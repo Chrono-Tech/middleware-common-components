@@ -3,6 +3,6 @@
  * Licensed under the AGPL Version 3 license.
  */
 const keccak256 = require('js-sha3').keccak256;
-module.exports = async (txRaw) => {
+module.exports = (txRaw) => {
     return keccak256(txRaw)'
 };
