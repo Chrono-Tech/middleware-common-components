@@ -5,5 +5,5 @@
 const bitcoin = require('bitcoinjs-lib');
 module.exports = (txRaw) => {
   const tx = bitcoin.Transaction.fromHex(txRaw);
-  return tx.getHash().toString('hex');
+  return tx.getId();
 };
