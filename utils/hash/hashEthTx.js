@@ -4,5 +4,5 @@
  */
 const keccak256 = require('js-sha3').keccak256;
 module.exports = (txRaw) => {
-    return keccak256(Buffer.from(txRaw.substring(2), 'hex'));
+    return '0x' + keccak256(Buffer.from(txRaw.substring(2), 'hex'));
 };
